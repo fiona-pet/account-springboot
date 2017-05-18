@@ -28,29 +28,21 @@ public class UserRestServiceTest {
       String token = client.buildToken("admin", "admin");
       User user = new User();
       user.setName("ceshi23");
-      user.setDisplayName("测试");
-      user.setMemo("测试数据");
-      user.setAccount("ceshizhanghao");
+      user.setLoginName("测试");
+      user.setPassword("123456");
       client.post("/users", token, JSON.toJSONString(user));
   }
 
   @Test
   public void detail() throws Exception {
       String token = client.buildToken("admin", "admin");
-      client.get("/users/2c913f795b9f1039015b9f15cf2e0000", token);
+      client.get("/users/27f962a0bbc7c0bc129fdcf6559cfae6", token);
   }
 
   @Test
   public void list() throws Exception {
-//        String token = client.buildToken("admin", "admin");
-      /*SearchFilter searchFilter = new SearchFilter();
-      searchFilter.setFieldName("account");
-      searchFilter.setOperator("EQ");
-      searchFilter.setValue("admin");
-      ListFilter listFilter = new ListFilter();
-      listFilter.setFilters(ImmutableList.of(searchFilter));*/
-
-      client.post("/users/list", "123");
+      String token = client.buildToken("admin", "admin");
+      client.get("/users/list", token);
   }
 
   @Test

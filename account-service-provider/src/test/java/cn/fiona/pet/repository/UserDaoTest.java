@@ -19,7 +19,7 @@ import java.util.List;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = TestSmartApplication.class)
-@ComponentScan("com.its.smart")
+@ComponentScan("cn.fiona.pet")
 @EnableAutoConfiguration
 public class UserDaoTest {
 

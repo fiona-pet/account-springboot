@@ -8,5 +8,5 @@ package cn.fiona.pet.repository;
 import cn.fiona.pet.entity.User;
 
 public interface UserDao extends DaoBase<User> {
-
+    User findByLoginName(String loginName);
 }

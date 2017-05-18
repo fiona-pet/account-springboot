@@ -29,7 +29,7 @@ public class SmartHttpClient {
 
     private static final MediaType REQUEST_HEAD = MediaType.parse("application/json; charset=utf-8");
 
-    private static final String HOST = "http://localhost:7890/smart/api";
+    private static final String HOST = "http://localhost:7890/account/api";
 
     private OkHttpClient client = new OkHttpClient();
 

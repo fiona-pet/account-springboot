@@ -48,22 +48,11 @@ public class SmartRealm extends AuthorizingRealm {
     /**
      * 查询用户
      *
-     * @param account 账号
+     * @param loginName 登录名
      * @return 用户
      */
-    private User getUser(String account) {
-        SearchFilter searchFilter = new SearchFilter();
-        searchFilter.setFieldName("account");
-        searchFilter.setOperator(SearchFilter.Operator.EQ.name());
-        searchFilter.setValue(account);
-        ListFilter listFilter = new ListFilter();
-        listFilter.addFilters(searchFilter);
-        List<User> users = userService.list(listFilter);
-        User user = null;
-        if (users != null && !users.isEmpty()) {
-            user = users.get(0);
-        }
-        return user;
+    private User getUser(String loginName) {
+        return userService.getUserByLoginName(loginName);
     }
 
     /**
@@ -188,7 +177,7 @@ public class SmartRealm extends AuthorizingRealm {
 
         //交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                user.getAccount(), //用户名
+                user.getLoginName(), //用户名
                 user.getPassword(), //密码
                 ByteSource.Util.bytes("smart"),//salt=username+salt
                 getName()  //realm name

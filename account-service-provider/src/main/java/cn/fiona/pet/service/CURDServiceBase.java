@@ -81,12 +81,12 @@ public abstract class CURDServiceBase<T extends Idable> implements CURDService<T
         if (entity instanceof IdEntity) {
             Session session = SecurityUtils.getSubject().getSession();
             Object userId = session.getAttribute("userId");
-            Object businessId = session.getAttribute("businessId");
+            Object businessId = session.getAttribute("enterpriseId");
             try {
                 if (null == ((IdEntity) entity).getId()) {
                     BeanUtilsBean.getInstance().setProperty(entity, "createTime", new Date());
                     BeanUtilsBean.getInstance().setProperty(entity, "createUser", userId);
-                    BeanUtilsBean.getInstance().setProperty(entity, "businessId", businessId);
+                    BeanUtilsBean.getInstance().setProperty(entity, "enterpriseId", businessId);
                     BeanUtilsBean.getInstance().setProperty(entity, "isCustom", true);
                 } else {
                     Object dbEntity = detail(((IdEntity) entity).getId());
@@ -141,11 +141,11 @@ public abstract class CURDServiceBase<T extends Idable> implements CURDService<T
 
     private Specification getSpecification(ListFilter listFilter) {
         Session session = SecurityUtils.getSubject().getSession();
-        Object businessId = session.getAttribute("businessId");
+        Object businessId = session.getAttribute("enterpriseId");
         SearchFilter searchFilter = null;
         if (businessId != null) {
             searchFilter = new SearchFilter();
-            searchFilter.setFieldName("businessId");
+            searchFilter.setFieldName("enterpriseId");
             searchFilter.setOperator(SearchFilter.Operator.EQ.name());
             searchFilter.setValue(businessId);
         }

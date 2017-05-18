@@ -1,6 +1,6 @@
 package cn.fiona.pet.facade;
 
-import cn.fiona.pet.converter.UserDataConverter;
+import cn.fiona.pet.converter.DefaultDataConverter;
 import cn.fiona.pet.dto.UserDTO;
 import cn.fiona.pet.entity.User;
 import cn.fiona.pet.service.UserService;
@@ -29,11 +29,11 @@ import lombok.Getter;
 @Api(value = "users", description = "用户信息接口")
 @Getter
 public class UserRestServiceImpl extends ConverterRestServiceBase<UserDTO, User> implements UserRestService {
-
     @Autowired
     private UserService service;
 
-    @Autowired
-    private UserDataConverter dataConverter;
-
+    @Override
+    public void forwardAfter(final UserDTO userDTO) {
+        userDTO.setEnterpriseId("锐捷网络");
+    }
 }

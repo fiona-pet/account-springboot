@@ -23,7 +23,7 @@ public class PasswordHelperTest {
         PasswordHelper passwordHelper = new PasswordHelper();
         System.out.println(passwordHelper.encryptPassword("admin"));
 
-        System.out.println(UUID.fromString("test"));
+//        System.out.println(UUID.fromString("test"));
     }
 
     public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException {

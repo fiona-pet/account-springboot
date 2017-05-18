@@ -62,8 +62,8 @@ public class SmartExceptionMapper implements ExceptionMapper<RuntimeException> {
             LOGGER.error("数据验证失败", ex);
         } else {
             restResult.setErrorCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
-            restResult.setErrorMessage("服务器内部错误");
-            LOGGER.error("服务器内部错误", ex);
+            restResult.setErrorMessage(message);
+            LOGGER.error(message, ex);
         }
         return Response.status(Response.Status.OK).entity(restResult).type(ContentType.APPLICATION_JSON_UTF_8).build();
     }

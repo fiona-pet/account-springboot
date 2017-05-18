@@ -1,7 +1,7 @@
 package cn.fiona.pet.facade;
 
-import cn.fiona.pet.converter.DataConverter;
-import cn.fiona.pet.dto.Converter;
+import cn.fiona.pet.converter.Converter;
+import cn.fiona.pet.converter.DefaultDataConverter;
 import cn.fiona.pet.dto.ListFilter;
 import cn.fiona.pet.dto.PageSearch;
 import cn.fiona.pet.dto.RestResult;
@@ -17,19 +17,17 @@ import java.util.List;
  * DTO转化你的基本实现
  * Created by X on 2017/4/17.
  */
-public abstract class ConverterRestServiceBase<A, B> implements CURDRestService<A> {
+public abstract class ConverterRestServiceBase<A, B> extends DefaultDataConverter<A, B> implements CURDRestService<A>, Converter<A, B> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConverterRestServiceBase.class);
 
     public abstract CURDService<B> getService();
 
-    public abstract DataConverter<A, B> getDataConverter();
-
     @Override
     public RestResult<List<A>> list(ListFilter listFilter) {
         List<B> list = this.getService().list(listFilter);
         LOGGER.debug("list:{}", list);
-        List<A> dtoList = this.getDataConverter().doForwardList(list);
+        List<A> dtoList = doForwardList(list);
         LOGGER.debug("dtoList:{}", dtoList);
         return RestResult.OK(dtoList);
     }
@@ -38,7 +36,7 @@ public abstract class ConverterRestServiceBase<A, B> implements CURDRestService<
     public RestResult<Page<A>> page(PageSearch pageSearch) {
         Page page = this.getService().page(pageSearch);
         LOGGER.debug("pageSearch:{} => {}", pageSearch, page);
-        List<A> dtoList = this.getDataConverter().doForwardList(page.getContent());
+        List<A> dtoList = doForwardList(page.getContent());
         page.getContent().clear();
         page.getContent().addAll(dtoList);
         LOGGER.debug("dtoPageSearch:{} => {}", pageSearch, page);
@@ -48,7 +46,7 @@ public abstract class ConverterRestServiceBase<A, B> implements CURDRestService<
     @Override
     public RestResult<A> create(A petRace) {
         LOGGER.debug("create or update :{}", petRace);
-        B entity = this.getDataConverter().doBackward(petRace);
+        B entity = doBackward(petRace);
         return RestResult.OK(this.getService().createOrUpdte(entity));
     }
 
@@ -62,7 +60,7 @@ public abstract class ConverterRestServiceBase<A, B> implements CURDRestService<
     @Override
     public RestResult<A> detail(String uuid) {
         B entity = getService().detail(uuid);
-        A dto = this.getDataConverter().doForward(entity);
+        A dto = doForward(entity);
         return RestResult.OK(dto);
     }
 }

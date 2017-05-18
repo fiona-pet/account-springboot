@@ -29,7 +29,7 @@ public abstract class IdEntity implements Idable, Serializable {
     protected String id;
 
     @Id
-    @Column(name = "c_id", columnDefinition = "id")
+    @Column(name = "id", columnDefinition = "id")
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     public String getId() {

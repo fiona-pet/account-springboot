@@ -25,7 +25,7 @@ public class PasswordHelper {
         String newPassword = new SimpleHash(
                 algorithmName,
                 password,
-                ByteSource.Util.bytes("smart"),
+                ByteSource.Util.bytes("fiona"),
                 hashIterations).toHex();
         return newPassword;
     }
