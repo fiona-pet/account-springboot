@@ -37,12 +37,6 @@ public class UserDTO {
     @ApiModelProperty(value = "加密密码", required = true)
     private String password;
     /**
-     * 加密 佐料
-     */
-    @ApiModelProperty(value = "加密 佐料")
-    private String salt;
-
-    /**
      * 注册日期
      */
     @ApiModelProperty(value = "注册日期")

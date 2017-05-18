@@ -1,1 +1,4 @@
-INSERT INTO `t_user` (`c_id`, `c_name`, `c_display_name`, `c_status`, `c_modify_user`, `c_create_user`, `c_create_time`, `c_modify_time`, `c_account`, `c_password`, `c_sex`, `c_icon`, `c_deparment_id`, `c_email`, `c_phone`, `c_is_custom`, `c_memo`, `c_business_id`) VALUES ('1c793bb7-da3c-4eb4-b94c-0030246adc95', 'admin', '超级管理员', '1', NULL, NULL, '2017-03-17 15:52:36', NULL, 'admin', '27f962a0bbc7c0bc129fdcf6559cfae6', 'Male', NULL, 'ff680283-e0a5-418a-b051-ada8f7fadaa6', NULL, NULL, '0', '手工录入', '0080b4cd-0d0d-4960-a3ce-ab3089a17e12');
+-- ----------------------------
+-- Table data for t_user
+-- ----------------------------
+insert into t_user (id,enterprise_id, login_name, name, password, register_date) values('fc5db3b3-4063-4a12-a511-880ba19e4b58','9b06d376-44ff-4153-9b31-c29a19b8da29','admin','Admin','56fcd971c24e6472c2702c3d3e5ecceb','2012-06-04 01:00:00');
