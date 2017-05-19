@@ -1,17 +1,11 @@
 package cn.fiona.pet.service;
 
-import cn.fiona.pet.dto.SearchFilter;
 import cn.fiona.pet.entity.User;
 import cn.fiona.pet.repository.UserDao;
-
+import lombok.Getter;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
 

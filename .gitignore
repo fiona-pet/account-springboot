@@ -3,7 +3,7 @@
 .idea
 log
 *.iml
-
+.DS_Store
 # Log file
 *.log
 
