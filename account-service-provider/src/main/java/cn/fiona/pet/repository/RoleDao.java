@@ -7,4 +7,5 @@ import cn.fiona.pet.entity.Role;
 * Created by tom on 2017-06-01 11:28:43.
  **/
 public interface RoleDao extends DaoBase<Role> {
+    Role findByCode(String code);
 }
