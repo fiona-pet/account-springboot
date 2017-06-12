@@ -47,7 +47,12 @@ public abstract class ConverterRestServiceBase<A, B> extends DefaultDataConverte
     public RestResult<A> create(A petRace) {
         LOGGER.debug("create or update :{}", petRace);
         B entity = doBackward(petRace);
-        return RestResult.OK(this.getService().createOrUpdte(entity));
+
+        this.getService().createOrUpdte(entity);
+
+        A restult = doForward(entity);
+
+        return RestResult.OK(restult);
     }
 
     @Override

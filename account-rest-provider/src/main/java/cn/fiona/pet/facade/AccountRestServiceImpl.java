@@ -6,6 +6,7 @@ import cn.fiona.pet.dto.SignUpDTO;
 import cn.fiona.pet.entity.User;
 import cn.fiona.pet.security.PermissionEnum;
 import cn.fiona.pet.security.credentials.PasswordHelper;
+import cn.fiona.pet.service.AccountService;
 import cn.fiona.pet.service.UserService;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.rpc.protocol.rest.support.ContentType;
@@ -44,65 +45,17 @@ public class AccountRestServiceImpl implements AccountRestService {
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountRestServiceImpl.class);
 
     @Autowired
-    private UserService userService;
-
-    @POST
-    @Path("sign-in")
-    @ApiOperation(value = "获取用户列表", notes = "")
-    @Override
-    public RestResult signIn(SignInDTO signIn, @Context HttpServletRequest request, @Context HttpServletResponse response) {
-        String userName = signIn.getName();
-        String password = signIn.getPassword();
-
-        User user = userService.getUserByLoginName(userName);
-
-        if(null == user){
-            throw new UnauthorizedException("用户不存在");
-        }
-
-        PasswordHelper passwordHelper = new PasswordHelper();
-
-        String encryptPassword = passwordHelper.encryptPassword(password);
-
-        if (!encryptPassword.equals(user.getPassword())){
-            throw new UnauthorizedException("密码错误");
-        }
-
-        UsernamePasswordToken token = new UsernamePasswordToken(userName, encryptPassword, false);
-
-        Subject subject = SecurityUtils.getSubject();
-        subject.login(token);
-
-        if (user != null) {
-            Session session = subject.getSession(true);
-            session.setAttribute("userId", user.getId());
-            session.setAttribute("enterpriseId", user.getEnterpriseId());
-
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    subject.isPermitted("+users+" + PermissionEnum.QUERY.getValue());
-                }
-            }).start();
-
-        }
-
-        return RestResult.OK(user);
-    }
-
-    @POST
-    @Path("sign-out")
-    @Override
-    public RestResult signOut() {
-        Subject subject = SecurityUtils.getSubject();
-        subject.logout();
-        return RestResult.OK("成功退出");
-    }
+    private AccountService accountService;
 
     @POST
     @Path("sign-up")
     @Override
     public RestResult signUp(SignUpDTO signUp) {
+        return null;
+    }
+
+    @Override
+    public RestResult signIn(SignInDTO signIn) {
         return null;
     }
 }
