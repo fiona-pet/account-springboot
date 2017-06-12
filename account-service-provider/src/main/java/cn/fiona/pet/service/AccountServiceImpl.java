@@ -7,9 +7,11 @@ import cn.fiona.pet.entity.User;
 import cn.fiona.pet.repository.RoleDao;
 import cn.fiona.pet.repository.UserDao;
 import com.alibaba.dubbo.common.utils.StringUtils;
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springside.modules.security.utils.Digests;
 import org.springside.modules.utils.Encodes;
 
@@ -23,6 +25,9 @@ import java.util.Set;
 /**
  * Created by tom on 2017/6/2.
  */
+
+@Service
+@Getter
 public class AccountServiceImpl implements AccountService {
     @Autowired
     private UserDao userDao;
@@ -98,13 +103,13 @@ public class AccountServiceImpl implements AccountService {
     public List<User> listByRoleCode(String code) {
         Role role = roleDao.findByCode(code);
         List<User> users = new ArrayList<User>();
-        for (User user: role.getUsers()){
-            User userVO = new User();
-            userVO.setName(user.getName());
-            userVO.setId(user.getId());
-            userVO.setLoginName(user.getLoginName());
-            users.add(userVO);
-        }
+//        for (User user: role.getUsers()){
+//            User userVO = new User();
+//            userVO.setName(user.getName());
+//            userVO.setId(user.getId());
+//            userVO.setLoginName(user.getLoginName());
+//            users.add(userVO);
+//        }
 
         return users;
     }
@@ -117,17 +122,17 @@ public class AccountServiceImpl implements AccountService {
 
         Set<Role> roleSet = new HashSet<Role>();
 
-        for (Role role: user.getRoles()){
-            logger.debug("add role:{}", role.getCode());
-            Role r = roleDao.findByCode(role.getCode());
-            roleSet.add(r);
-        }
-
-        if (roleSet.size() == 0){
-            roleSet.add(roleDao.findByCode("doctor"));
-        }
-
-        user.setRoles(roleSet);
+//        for (Role role: user.getRoles()){
+//            logger.debug("add role:{}", role.getCode());
+//            Role r = roleDao.findByCode(role.getCode());
+//            roleSet.add(r);
+//        }
+//
+//        if (roleSet.size() == 0){
+//            roleSet.add(roleDao.findByCode("doctor"));
+//        }
+//
+//        user.setRoles(roleSet);
 
         encode(user);
 
@@ -159,11 +164,11 @@ public class AccountServiceImpl implements AccountService {
             throw new InvalidParameterException(String.format("%s not exists!", token));
         }
 
-        for (Role r: user.getRoles()){
-            if (r.getCode().equalsIgnoreCase(role)){
-                return true;
-            }
-        }
+//        for (Role r: user.getRoles()){
+//            if (r.getCode().equalsIgnoreCase(role)){
+//                return true;
+//            }
+//        }
 
         return false;
     }

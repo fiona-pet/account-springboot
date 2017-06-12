@@ -47,27 +47,27 @@ public class Role extends IdEntity {
     @ApiModelProperty(value = "", required = false)
     private String describe;
 
-    /**
-     * 用户信息
-     */
-    private Set<User> users = new LinkedHashSet<User>();
+//    /**
+//     * 用户信息
+//     */
+//    private Set<User> users = new LinkedHashSet<User>();
+//
+//    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    public Set<User> getUsers() {
+//        return users;
+//    }
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    @JsonIgnore
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    /**
-     * 菜单 信息
-     */
-    private Set<Menu> menuSet;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "t_role_menu",
-            joinColumns = {@JoinColumn(name = "role_code", referencedColumnName = "code")},
-            inverseJoinColumns = {@JoinColumn(name = "menu_code", referencedColumnName = "code")})
-    @JsonIgnore
-    public Set<Menu> getMenuSet() {
-        return menuSet;
-    }
+//    /**
+//     * 菜单 信息
+//     */
+//    private Set<Menu> menuSet;
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "t_role_menu",
+//            joinColumns = {@JoinColumn(name = "role_code", referencedColumnName = "code")},
+//            inverseJoinColumns = {@JoinColumn(name = "menu_code", referencedColumnName = "code")})
+//    @JsonIgnore
+//    public Set<Menu> getMenuSet() {
+//        return menuSet;
+//    }
 }

@@ -23,15 +23,9 @@ CREATE TABLE `t_role` (
   `name` VARCHAR(64) NOT NULL,
   `code` VARCHAR(36) NOT NULL UNIQUE,
   `describe` varchar(256),
-  `status` varchar(32) NOT NULL DEFAULT 'OK',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
--- ----------------------------
--- Table structure for t_user_role
--- ----------------------------
-DROP TABLE IF EXISTS `t_user_role`;
+  `status` varchar(32) NOT NULL DEFAULT 'OK',DROP TABLE IF EXISTS `t_user_role`;
 CREATE TABLE `t_user_role` (
+  `id` VARCHAR(36) NOT NULL,
   `user_id` VARCHAR(36) NOT NULL,
   `role_id` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`user_id`, `role_id`)
@@ -39,6 +33,13 @@ CREATE TABLE `t_user_role` (
   ENGINE = InnoDB
   AUTO_INCREMENT = 6
   DEFAULT CHARSET = utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+-- ----------------------------
+-- Table structure for t_user_role
+-- ----------------------------
+
 -- ----------------------------
 -- Table structure for t_menu
 -- ----------------------------

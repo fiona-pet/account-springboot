@@ -26,13 +26,11 @@ import java.util.Date;
 @Getter
 @ToString
 public class UserRole extends IdEntity {
-    
     /**
      * 
      */
     @ApiModelProperty(value = "", required = false)
     private String userId;
-    
     /**
      * 
      */
