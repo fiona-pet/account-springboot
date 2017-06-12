@@ -58,16 +58,12 @@ public class Role extends IdEntity {
         return userRoles;
     }
 
-//    /**
-//     * 菜单 信息
-//     */
-//    private Set<Menu> menuSet;
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "t_role_menu",
-//            joinColumns = {@JoinColumn(name = "role_code", referencedColumnName = "code")},
-//            inverseJoinColumns = {@JoinColumn(name = "menu_code", referencedColumnName = "code")})
-//    @JsonIgnore
-//    public Set<Menu> getMenuSet() {
-//        return menuSet;
-//    }
+    /**
+     * 菜单 信息
+     */
+    private Set<RoleMenu> roleMenus;
+    @OneToMany(fetch= FetchType.EAGER, mappedBy = "role")
+    public Set<RoleMenu> getRoleMenus() {
+        return roleMenus;
+    }
 }

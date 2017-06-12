@@ -5,12 +5,15 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.beans.BeanUtils;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 用户信息
- *
+ * <p>
  * <p>
  * Created by tom on 2017-05-19 14:31:34.
  */
@@ -18,57 +21,26 @@ import java.util.Date;
 @ToString
 @Setter
 @Getter
-public class MenuDTO{
-    @ApiModelProperty(value = "id")
+public class MenuDTO implements Serializable {
+    @ApiModelProperty("id")
     private String id;
 
-    
-    /**
-     * 
-     */
-    @ApiModelProperty(value = "", required = false)
-     private String name;
-    
-    /**
-     * 
-     */
-    @ApiModelProperty(value = "", required = false)
-     private String code;
-    
-    /**
-     * 
-     */
-    @ApiModelProperty(value = "", required = false)
-     private String uri;
-    
-    /**
-     * 
-     */
-    @ApiModelProperty(value = "", required = false)
-     private String iconClass;
-    
-    /**
-     * 
-     */
-    @ApiModelProperty(value = "", required = false)
-     private String describe;
-    
-    /**
-     * 
-     */
-    @ApiModelProperty(value = "", required = false)
-     private Boolean leaf;
-    
-    /**
-     * 
-     */
-    @ApiModelProperty(value = "", required = false)
-     private Integer order;
-    
-    /**
-     * 
-     */
-    @ApiModelProperty(value = "", required = false)
-     private String parentId;
-    
+    public MenuDTO(Object source) {
+        BeanUtils.copyProperties(this, source);
+    }
+
+    @ApiModelProperty("名称")
+    private String name;
+    @ApiModelProperty("编码")
+    private String code;
+    @ApiModelProperty("叶子节点")
+    private boolean leaf;
+    @ApiModelProperty("排序")
+    private int order;
+    @ApiModelProperty("图标样式")
+    private String iconClass;
+    @ApiModelProperty("地址")
+    private String uri;
+    @ApiModelProperty("子菜单")
+    private List<MenuDTO> subMenu = new ArrayList<MenuDTO>();
 }

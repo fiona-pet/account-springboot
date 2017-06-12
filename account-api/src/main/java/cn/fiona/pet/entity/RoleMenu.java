@@ -8,8 +8,7 @@ import lombok.ToString;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -26,17 +25,30 @@ import java.util.Date;
 @Getter
 @ToString
 public class RoleMenu extends IdEntity {
-    
     /**
-     * 
+     * 菜单信息
      */
-    @ApiModelProperty(value = "", required = false)
-    private String roleCode;
-    
+    @ApiModelProperty(value = "菜单信息", required = false)
+    private Menu menu;
+
     /**
-     * 
+     * 角色信息
      */
-    @ApiModelProperty(value = "", required = false)
-    private String menuCode;
-    
+    @ApiModelProperty(value = "角色信息", required = false)
+    private Role role;
+
+
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
+    @JoinColumn(name="menu_code")
+    public Menu getMenu(){
+        return menu;
+    }
+
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
+    @JoinColumn(name="role_code")
+    public Role getRole(){
+        return role;
+    }
+
+
 }

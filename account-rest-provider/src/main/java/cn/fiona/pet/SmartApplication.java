@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ImportResource;
 
 /**
  * Created by X on 2017/3/30.
+ * http://www.cnblogs.com/Alandre/p/6490142.html
  * Smart应用启动入口
  */
 

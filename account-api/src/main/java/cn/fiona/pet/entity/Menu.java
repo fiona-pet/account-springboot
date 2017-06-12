@@ -1,5 +1,6 @@
 package cn.fiona.pet.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -7,10 +8,13 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * 菜单信息
@@ -70,9 +74,36 @@ public class Menu extends IdEntity {
     private Integer order;
     
     /**
-     * 
+     * 角色菜单 信息
      */
-    @ApiModelProperty(value = "", required = false)
-    private String parentId;
-    
+    private Set<RoleMenu> roleMenus;
+    @OneToMany(fetch= FetchType.EAGER, mappedBy = "menu")
+    public Set<RoleMenu> getRoleMenus() {
+        return roleMenus;
+    }
+
+    /**
+     * 子组
+     */
+    private Set<Menu> menus = new LinkedHashSet<Menu>();
+    /**
+     * 父组
+     */
+    private Menu parentMenu;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY, mappedBy = "parentMenu")
+    public Set<Menu> getMenus() {
+        return menus;
+    }
+
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id", referencedColumnName = "code")
+    @NotFound(action = NotFoundAction.IGNORE)
+    public Menu getParentMenu() {
+        return parentMenu;
+    }
+
 }

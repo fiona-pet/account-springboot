@@ -22,8 +22,8 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
-    <logger name="cn.fiona.pet" level="DEBUG" additivity="false">
+    <logger name="cn.fiona.pet" level="INFO" additivity="false">
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="FILE"/>
+        <!--<appender-ref ref="FILE"/>-->
     </logger>
 </configuration>

@@ -1,5 +1,7 @@
 package cn.fiona.pet.facade;
 
+import cn.fiona.pet.dto.RestResult;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,10 +14,9 @@ import io.swagger.annotations.Api;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 /**
  * 菜单信息
@@ -23,6 +24,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Api(value="menus", description = "菜单信息接口")
 @Path("menus")
+@Service(protocol = "rest")
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({ContentType.APPLICATION_JSON_UTF_8})
 @Getter
@@ -31,4 +33,16 @@ public class MenuRestServiceImpl extends ConverterRestServiceBase<MenuDTO, Menu>
 
     @Autowired
     private MenuService service;
+
+    @Override
+    @GET
+    @Path("/")
+    @ApiOperation(value = "用户菜单",
+            notes = "用户菜单数据"
+    )
+    public RestResult<List<MenuDTO>> menus(@HeaderParam(AuthRestService.HEADER_AUTHORIZATION_KEY) String token) {
+        List<MenuDTO> menus = service.menus(token);
+        LOGGER.info("menus:{}", menus);
+        return RestResult.OK(menus);
+    }
 }
