@@ -4,8 +4,10 @@ import cn.fiona.pet.dto.SignInDTO;
 import cn.fiona.pet.entity.Organize;
 import cn.fiona.pet.entity.Role;
 import cn.fiona.pet.entity.User;
+import cn.fiona.pet.entity.UserRole;
 import cn.fiona.pet.repository.RoleDao;
 import cn.fiona.pet.repository.UserDao;
+import cn.fiona.pet.repository.UserRoleDao;
 import com.alibaba.dubbo.common.utils.StringUtils;
 import lombok.Getter;
 import org.slf4j.Logger;
@@ -34,6 +36,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private RoleDao roleDao;
+
+    @Autowired
+    private UserRoleDao userRoleDao;
 
     private Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
 
@@ -101,15 +106,15 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<User> listByRoleCode(String code) {
-        Role role = roleDao.findByCode(code);
+        List<UserRole> userRoles = userRoleDao.findByRoleCode(code);
         List<User> users = new ArrayList<User>();
-//        for (User user: role.getUsers()){
-//            User userVO = new User();
-//            userVO.setName(user.getName());
-//            userVO.setId(user.getId());
-//            userVO.setLoginName(user.getLoginName());
-//            users.add(userVO);
-//        }
+        for (UserRole userRole: userRoles){
+            User userVO = new User();
+            userVO.setName(userRole.getUser().getName());
+            userVO.setId(userRole.getUser().getId());
+            userVO.setLoginName(userRole.getUser().getLoginName());
+            users.add(userVO);
+        }
 
         return users;
     }
@@ -120,12 +125,11 @@ public class AccountServiceImpl implements AccountService {
         organize.setId("9b06d376-44ff-4153-9b31-c29a19b8da29");
         user.setOrganize(organize);
 
-        Set<Role> roleSet = new HashSet<Role>();
-
-//        for (Role role: user.getRoles()){
-//            logger.debug("add role:{}", role.getCode());
-//            Role r = roleDao.findByCode(role.getCode());
-//            roleSet.add(r);
+//        Set<Role> roleSet = new HashSet<Role>();
+//
+//        for (UserRole role: user.getUserRoles()){
+//            logger.debug("add role:{}", role.getRole().getCode());
+//            roleSet.add(role.getRole());
 //        }
 //
 //        if (roleSet.size() == 0){
@@ -164,11 +168,11 @@ public class AccountServiceImpl implements AccountService {
             throw new InvalidParameterException(String.format("%s not exists!", token));
         }
 
-//        for (Role r: user.getRoles()){
-//            if (r.getCode().equalsIgnoreCase(role)){
-//                return true;
-//            }
-//        }
+        for (UserRole ur: user.getUserRoles()){
+            if (null != role && role.equalsIgnoreCase(ur.getRole().getCode())){
+                return true;
+            }
+        }
 
         return false;
     }

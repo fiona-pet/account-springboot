@@ -9,11 +9,14 @@ CREATE TABLE `t_user` (
   `login_name` varchar(64) NOT NULL,
   `name` varchar(64) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `salt` varchar(64) DEFAULT NULL,
   `register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` varchar(32) NOT NULL DEFAULT 'OK',
   PRIMARY KEY (`id`),
   UNIQUE KEY `login_name` (`login_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+-- ----------------------------
+
 -- ----------------------------
 -- Table structure for t_role
 -- ----------------------------
@@ -79,4 +82,5 @@ CREATE TABLE `t_organize` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
 

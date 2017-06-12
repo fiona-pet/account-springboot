@@ -27,11 +27,10 @@
     <dubbo:annotation package="cn.fiona.pet.service, cn.fiona.pet.facade"/>
 
     <!-- use tomcat server -->
-    <dubbo:protocol name="rest" port="7890" threads="500" contextpath="account/api" server="servlet"
+    <dubbo:protocol name="rest" port="7890" threads="500" contextpath="account/api/v2" server="servlet"
                     accepts="500"
                     extension="cn.fiona.pet.extension.SmartExceptionMapper,
-                    cn.fiona.pet.extension.TimerFilter,
-                    cn.fiona.pet.extension.PermissionFilter"/>
+                    cn.fiona.pet.extension.TimerFilter"/>
 
     <dubbo:provider timeout="6000"/>
     <dubbo:consumer timeout="6000" check="false"/>

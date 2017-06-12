@@ -54,6 +54,11 @@ public class AccountRestServiceImpl implements AccountRestService {
         return null;
     }
 
+    @POST
+    @Path("sign-in")
+    @ApiOperation(value = "登录",
+            notes = "用户登录"
+    )
     @Override
     public RestResult signIn(SignInDTO signIn) {
         return null;

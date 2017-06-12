@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  *
  */
-@Configuration
+//@Configuration
 public class ShiroConfiguration {
 
     @Bean(name = "cacheManager")

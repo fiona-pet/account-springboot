@@ -22,7 +22,7 @@ import javax.ws.rs.core.UriInfo;
  * Time: 9:50
  * 用户cookie登陆
  */
-@Priority(Priorities.USER)
+//@Priority(Priorities.USER)
 public class SessionFilter implements ContainerRequestFilter {
 
     @Override
