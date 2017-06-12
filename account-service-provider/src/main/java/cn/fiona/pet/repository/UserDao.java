@@ -9,4 +9,6 @@ import cn.fiona.pet.entity.User;
 
 public interface UserDao extends DaoBase<User> {
     User findByLoginName(String loginName);
+
+    User findById(String token);
 }

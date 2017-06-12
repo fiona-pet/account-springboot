@@ -84,3 +84,9 @@ CREATE TABLE `t_organize` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 
+-- ALTER TABLE t_role_menu ADD `id` VARCHAR(36);
+-- update t_role_menu set id=uuid();
+-- ALTER TABLE t_user_role ADD `id` VARCHAR(36);
+-- update t_user_role set id=uuid();
+--
+

@@ -41,7 +41,7 @@ public class MenuServiceImpl extends CURDServiceBase<Menu> implements MenuServic
     public Set<Menu> findByToken(String token) {
         Set<Menu> menus = new HashSet<Menu>();
 
-        User user = userDao.findOne(token);
+        User user = userDao.findById(token);
         Set<UserRole> userRoles = user.getUserRoles();
 
         for (UserRole userRole : userRoles) {

@@ -63,6 +63,7 @@ public class Role extends IdEntity {
      */
     private Set<RoleMenu> roleMenus;
     @OneToMany(fetch= FetchType.EAGER, mappedBy = "role")
+//    @JoinColumn(name="code")
     public Set<RoleMenu> getRoleMenus() {
         return roleMenus;
     }

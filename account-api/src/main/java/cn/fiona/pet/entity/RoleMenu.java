@@ -39,13 +39,13 @@ public class RoleMenu extends IdEntity {
 
 
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
-    @JoinColumn(name="menu_code")
+    @JoinColumn(name="menu_code", referencedColumnName = "code")
     public Menu getMenu(){
         return menu;
     }
 
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
-    @JoinColumn(name="role_code")
+    @JoinColumn(name="role_code", referencedColumnName = "code")
     public Role getRole(){
         return role;
     }

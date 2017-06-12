@@ -26,7 +26,7 @@ public class MenuDTO implements Serializable {
     private String id;
 
     public MenuDTO(Object source) {
-        BeanUtils.copyProperties(this, source);
+        BeanUtils.copyProperties(source, this);
     }
 
     @ApiModelProperty("名称")
