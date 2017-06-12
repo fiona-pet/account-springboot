@@ -11,6 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -47,16 +48,15 @@ public class Role extends IdEntity {
     @ApiModelProperty(value = "", required = false)
     private String describe;
 
-//    /**
-//     * 用户信息
-//     */
-//    private Set<User> users = new LinkedHashSet<User>();
-//
-//    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-//    @JsonIgnore
-//    public Set<User> getUsers() {
-//        return users;
-//    }
+    /**
+     * 用户 角色 信息
+     */
+    private Set<UserRole> userRoles = new HashSet<UserRole>();
+
+    @OneToMany(fetch= FetchType.EAGER, mappedBy = "role")
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
 
 //    /**
 //     * 菜单 信息

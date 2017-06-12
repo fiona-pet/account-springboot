@@ -8,8 +8,7 @@ import lombok.ToString;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -27,14 +26,28 @@ import java.util.Date;
 @ToString
 public class UserRole extends IdEntity {
     /**
-     * 
+     * 用户信息
      */
-    @ApiModelProperty(value = "", required = false)
-    private String userId;
+    @ApiModelProperty(value = "用户信息", required = false)
+    private User user;
+
     /**
-     * 
+     * 角色信息
      */
-    @ApiModelProperty(value = "", required = false)
-    private String roleId;
+    @ApiModelProperty(value = "角色信息", required = false)
+    private Role role;
+
+
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
+    @JoinColumn(name="user_id")
+    public User getUser(){
+        return user;
+    }
+
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)
+    @JoinColumn(name="role_id")
+    public Role getRole(){
+        return this.role;
+    }
     
 }

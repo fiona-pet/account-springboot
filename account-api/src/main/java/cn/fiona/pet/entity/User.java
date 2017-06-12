@@ -73,20 +73,16 @@ public class User extends IdEntity {
     public String getPlainPassword() {
         return plainPassword;
     }
-//
-//    /**
-//     * 用户 角色 信息
-//     */
-//    private Set<Role> roles = new HashSet<Role>();
-//
-//    @ManyToMany(fetch= FetchType.EAGER)
-//    @JoinTable(name="t_user_role",
-//            joinColumns={@JoinColumn(name="user_id")},
-//            inverseJoinColumns={@JoinColumn(name="role_id")}
-//    )
-//    public Set<Role> getRoles() {
-//        return roles;
-//    }
+
+    /**
+     * 用户 角色 信息
+     */
+    private Set<UserRole> userRoles = new HashSet<UserRole>();
+
+    @OneToMany(fetch= FetchType.EAGER, mappedBy = "user")
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
 
     @ManyToOne
     @JoinColumn(name = "enterprise_id", referencedColumnName = "id")
