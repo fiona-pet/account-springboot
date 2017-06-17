@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
  *  用户和角色关系信息
  * Created by tom on 2017-06-02 10:37:08.
  */
+@Service
 @Getter
 public class UserRoleServiceImpl extends CURDServiceBase<UserRole> implements UserRoleService {
     @Autowired

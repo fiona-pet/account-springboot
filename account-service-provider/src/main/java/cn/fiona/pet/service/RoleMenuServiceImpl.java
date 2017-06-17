@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
  *  角色和菜单关系信息
  * Created by tom on 2017-06-02 09:47:59.
  */
+@Service
 @Getter
 public class RoleMenuServiceImpl extends CURDServiceBase<RoleMenu> implements RoleMenuService {
     @Autowired

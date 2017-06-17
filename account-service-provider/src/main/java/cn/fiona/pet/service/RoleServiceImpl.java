@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
  *  角色信息
  * Created by tom on 2017-06-01 11:28:43.
  */
+@Service
 @Getter
 public class RoleServiceImpl extends CURDServiceBase<Role> implements RoleService {
     @Autowired

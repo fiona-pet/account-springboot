@@ -140,15 +140,15 @@ public abstract class CURDServiceBase<T extends Idable> implements CURDService<T
     }
 
     private Specification getSpecification(ListFilter listFilter) {
-        Session session = SecurityUtils.getSubject().getSession();
-        Object businessId = session.getAttribute("enterpriseId");
+//        Session session = SecurityUtils.getSubject().getSession();
+//        Object businessId = session.getAttribute("enterpriseId");
         SearchFilter searchFilter = null;
-        if (businessId != null) {
-            searchFilter = new SearchFilter();
-            searchFilter.setFieldName("enterpriseId");
-            searchFilter.setOperator(SearchFilter.Operator.EQ.name());
-            searchFilter.setValue(businessId);
-        }
+//        if (businessId != null) {
+//            searchFilter = new SearchFilter();
+//            searchFilter.setFieldName("enterpriseId");
+//            searchFilter.setOperator(SearchFilter.Operator.EQ.name());
+//            searchFilter.setValue(businessId);
+//        }
         Specification spec = null;
         if (null != listFilter.getAndFilters() && !listFilter.getAndFilters().isEmpty()) {
             if (searchFilter != null) {

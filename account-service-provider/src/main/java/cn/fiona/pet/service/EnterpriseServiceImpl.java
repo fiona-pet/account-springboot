@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
  *  企业信息
  * Created by tom on 2017-06-01 10:57:18.
  */
+@Service
 @Getter
 public class EnterpriseServiceImpl extends CURDServiceBase<Enterprise> implements EnterpriseService {
     @Autowired

@@ -22,6 +22,7 @@ import javax.ws.rs.core.MediaType;
  * Created by tom on 2017-06-01 10:57:18.
  */
 @Api(value="enterprises", description = "企业信息接口")
+@Service(protocol = "rest")
 @Path("enterprises")
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({ContentType.APPLICATION_JSON_UTF_8})

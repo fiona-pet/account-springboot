@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
  *  组织信息
  * Created by tom on 2017-06-01 11:13:25.
  */
+@Service
 @Getter
 public class OrganizeServiceImpl extends CURDServiceBase<Organize> implements OrganizeService {
     @Autowired

@@ -22,6 +22,7 @@ import javax.ws.rs.core.MediaType;
  * Created by tom on 2017-06-02 09:47:59.
  */
 @Api(value="rolemenus", description = "角色和菜单关系信息接口")
+@Service(protocol = "rest")
 @Path("rolemenus")
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({ContentType.APPLICATION_JSON_UTF_8})

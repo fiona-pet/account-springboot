@@ -22,6 +22,7 @@ import javax.ws.rs.core.MediaType;
  * Created by tom on 2017-06-02 10:37:09.
  */
 @Api(value="userroles", description = "用户和角色关系信息接口")
+@Service(protocol = "rest")
 @Path("userroles")
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({ContentType.APPLICATION_JSON_UTF_8})
