@@ -6,17 +6,17 @@ import java.util.List;
  * Created by X on 2017/4/17.
  * DTO与Entiry类型转换
  */
-public interface Converter<A, B> {
+public interface Converter<DTO, ENTITY> {
 
-    A doForward(B b);
+    DTO doForward(ENTITY b);
 
-    void forwardAfter(final A a);
+    void forwardAfter(final DTO a,final ENTITY entity);
 
-    B doBackward(A a);
+    ENTITY doBackward(DTO a);
 
-    void backwardAfter(final B b);
+    void backwardAfter(final ENTITY b);
 
-    List<A> doForwardList(List<B> list);
+    List<DTO> doForwardList(List<ENTITY> list);
 
-    List<B> doBackwardList(List<A> list);
+    List<ENTITY> doBackwardList(List<DTO> list);
 }

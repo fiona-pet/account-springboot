@@ -29,7 +29,8 @@ public class UserRestServiceImpl extends ConverterRestServiceBase<UserDTO, User>
     private UserService service;
 
     @Override
-    public void forwardAfter(final UserDTO userDTO) {
+    public void forwardAfter(final UserDTO userDTO, final User user) {
         userDTO.setEnterpriseId("锐捷网络");
     }
+
 }

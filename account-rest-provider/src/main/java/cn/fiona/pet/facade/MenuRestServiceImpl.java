@@ -45,4 +45,12 @@ public class MenuRestServiceImpl extends ConverterRestServiceBase<MenuDTO, Menu>
         LOGGER.info("menus:{}", menus);
         return RestResult.OK(menus);
     }
+
+    @Override
+    public void forwardAfter(MenuDTO a, Menu menu) {
+        if (menu.getParentMenu() != null ) {
+            a.setParentId(menu.getParentMenu().getId());
+            a.setParentCode(menu.getParentMenu().getCode());
+        }
+    }
 }

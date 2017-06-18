@@ -51,13 +51,9 @@ public abstract class DefaultDataConverter<dto, entity> implements Converter<dto
             BeanUtils.copyProperties(entity, dtoObject);
         }
 
-        forwardAfter(dtoObject);
+        forwardAfter(dtoObject, entity);
 
         return dtoObject;
-    }
-
-    @Override
-    public void forwardAfter(final dto dto) {
     }
 
     @Override
@@ -88,5 +84,10 @@ public abstract class DefaultDataConverter<dto, entity> implements Converter<dto
             result.add(this.doBackward(dto));
         }
         return result;
+    }
+
+    @Override
+    public void forwardAfter(dto a, entity entity) {
+
     }
 }

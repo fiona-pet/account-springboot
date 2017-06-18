@@ -30,7 +30,10 @@ public class MenuDTO implements Serializable {
     public MenuDTO(Object source) {
         BeanUtils.copyProperties(source, this);
     }
-
+    @ApiModelProperty("父菜单id")
+    private String parentId;
+    @ApiModelProperty("父菜单code")
+    private String parentCode;
     @ApiModelProperty("名称")
     private String name;
     @ApiModelProperty("编码")
