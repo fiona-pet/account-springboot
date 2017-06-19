@@ -1,9 +1,6 @@
 package cn.fiona.pet.facade;
 
-import cn.fiona.pet.dto.ListFilter;
-import cn.fiona.pet.dto.PageSearch;
-import cn.fiona.pet.dto.SearchFilter;
-import cn.fiona.pet.dto.Sort;
+import cn.fiona.pet.dto.*;
 import cn.fiona.pet.entity.User;
 
 import com.google.common.collect.ImmutableList;
@@ -26,7 +23,7 @@ public class UserRestServiceTest {
   @Test
   public void create() throws Exception {
       String token = client.buildToken("admin", "admin");
-      User user = new User();
+      UserDTO user = new UserDTO();
       user.setName("ceshi23");
       user.setLoginName("测试");
       user.setPassword("123456");

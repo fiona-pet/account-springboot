@@ -1,6 +1,7 @@
 package cn.fiona.pet.facade;
 
 import cn.fiona.pet.dto.UserDTO;
+import cn.fiona.pet.entity.Organize;
 import cn.fiona.pet.entity.User;
 import cn.fiona.pet.service.UserService;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -33,4 +34,11 @@ public class UserRestServiceImpl extends ConverterRestServiceBase<UserDTO, User>
         userDTO.setEnterpriseId("锐捷网络");
     }
 
+    @Override
+    public void backwardAfter(User user) {
+        super.backwardAfter(user);
+        Organize organize = new Organize();
+        organize.setId("9b06d376-44ff-4153-9b31-c29a19b8da29");
+        user.setOrganize(organize);
+    }
 }

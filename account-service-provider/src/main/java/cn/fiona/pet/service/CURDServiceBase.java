@@ -79,15 +79,15 @@ public abstract class CURDServiceBase<T extends Idable> implements CURDService<T
 
     public T createOrUpdte(T entity) {
         if (entity instanceof IdEntity) {
-            Session session = SecurityUtils.getSubject().getSession();
-            Object userId = session.getAttribute("userId");
-            Object businessId = session.getAttribute("enterpriseId");
+//            Session session = SecurityUtils.getSubject().getSession();
+            Object userId = "userId";//session.getAttribute("userId");
+//            Object businessId = "businessId";//session.getAttribute("enterpriseId");
             try {
                 if (null == ((IdEntity) entity).getId()) {
                     BeanUtilsBean.getInstance().setProperty(entity, "createTime", new Date());
                     BeanUtilsBean.getInstance().setProperty(entity, "createUser", userId);
-                    BeanUtilsBean.getInstance().setProperty(entity, "enterpriseId", businessId);
-                    BeanUtilsBean.getInstance().setProperty(entity, "isCustom", true);
+//                    BeanUtilsBean.getInstance().setProperty(entity, "organize.enterpriseId", businessId);
+//                    BeanUtilsBean.getInstance().setProperty(entity, "isCustom", true);
                 } else {
                     Object dbEntity = detail(((IdEntity) entity).getId());
                     Map<String, Object> entityAttributeMap = PropertyUtils.describe(entity);
@@ -101,7 +101,7 @@ public abstract class CURDServiceBase<T extends Idable> implements CURDService<T
                         }
                     }
                     BeanUtilsBean.getInstance().setProperty(entity, "modifyTime", new Date());
-                    BeanUtilsBean.getInstance().setProperty(entity, "modifyUser", userId);
+//                    BeanUtilsBean.getInstance().setProperty(entity, "modifyUser", userId);
                 }
             } catch (Exception var3) {
                 LOGGER.warn("CU set propertie error!");

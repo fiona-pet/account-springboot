@@ -60,6 +60,7 @@ public abstract class DefaultDataConverter<dto, entity> implements Converter<dto
     public entity doBackward(dto dto) {
         entity entity = newEntity();
         BeanUtils.copyProperties(dto, entity);
+
         backwardAfter(entity);
         return entity;
     }

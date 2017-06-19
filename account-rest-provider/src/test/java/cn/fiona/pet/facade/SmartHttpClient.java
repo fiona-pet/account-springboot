@@ -29,20 +29,21 @@ public class SmartHttpClient {
 
     private static final MediaType REQUEST_HEAD = MediaType.parse("application/json; charset=utf-8");
 
-    private static final String HOST = "http://localhost:7890/account/api";
+    private static final String HOST = "http://localhost:7890/account/api/v2";
 
     private OkHttpClient client = new OkHttpClient();
 
     private RestResult restResult;
 
     public String buildToken(final String name, final String password) throws IOException {
-        Map<String, Object> param = Maps.newHashMap();
-        param.put("name", name);
-        param.put("password", password);
-        Response response = this.post("/accounts/sign-in", null, JSON.toJSONString(param));
-        List<String> setCookies = response.headers("Set-Cookie");
-        LOGGER.debug("cookies:{}", setCookies);
-        return setCookies.get(0);
+//        Map<String, Object> param = Maps.newHashMap();
+//        param.put("name", name);
+//        param.put("password", password);
+//        Response response = this.post("/accounts/sign-in", null, JSON.toJSONString(param));
+//        List<String> setCookies = response.headers("Set-Cookie");
+//        LOGGER.debug("cookies:{}", setCookies);
+//        return setCookies.get(0);'
+        return "fc5db3b3-4063-4a12-a511-880ba19e4b58";
     }
 
     /**
@@ -94,7 +95,8 @@ public class SmartHttpClient {
         if (Strings.isNullOrEmpty(token)) {
             request = new Request.Builder().url(uri).post(body).build();
         } else {
-            request = new Request.Builder().addHeader("Cookie", token).url(uri).post(body).build();
+            request = new Request.Builder().addHeader("authorization", token).url(uri).post(body).build();
+//            request = new Request.Builder().addHeader("Cookie", token).url(uri).post(body).build();
         }
         Response response = client.newCall(request).execute();
         check(response);
