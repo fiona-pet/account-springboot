@@ -7,10 +7,15 @@ import cn.fiona.pet.dto.PageSearch;
 import cn.fiona.pet.dto.RestResult;
 import cn.fiona.pet.service.CURDService;
 
+import com.google.common.collect.Lists;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -36,11 +41,16 @@ public abstract class ConverterRestServiceBase<A, B> extends DefaultDataConverte
     public RestResult<Page<A>> page(PageSearch pageSearch) {
         Page page = this.getService().page(pageSearch);
         LOGGER.debug("pageSearch:{} => {}", pageSearch, page);
-        List<A> dtoList = doForwardList(page.getContent());
-        page.getContent().clear();
-        page.getContent().addAll(dtoList);
+
+        Page result  = page.map(new org.springframework.core.convert.converter.Converter() {
+            @Override
+            public Object convert(Object o) {
+                return doForward((B)o);
+            }
+        });
+
         LOGGER.debug("dtoPageSearch:{} => {}", pageSearch, page);
-        return RestResult.OK(page);
+        return RestResult.OK(result);
     }
 
     @Override

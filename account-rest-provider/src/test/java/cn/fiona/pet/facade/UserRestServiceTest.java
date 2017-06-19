@@ -39,17 +39,23 @@ public class UserRestServiceTest {
   @Test
   public void list() throws Exception {
       String token = client.buildToken("admin", "admin");
-      client.get("/users/list", token);
+      client.post("/users/list", token);
   }
 
   @Test
   public void page() throws Exception {
       String token = client.buildToken("admin", "admin");
       PageSearch pageSearch = new PageSearch();
+
+
       pageSearch.setPageSize(10);
       pageSearch.setPageNumber(1);
+
+      SearchFilter searchFilter  = new SearchFilter("loginName", SearchFilter.Operator.EQ, "admin");
+      pageSearch.addFilters(searchFilter);
+
       Sort sort = new Sort();
-      sort.setFieldName("displayName");
+      sort.setFieldName("loginName");
       sort.setDirection("desc");
       pageSearch.setSort(sort);
       client.post("/users/page", token, JSON.toJSONString(pageSearch));
