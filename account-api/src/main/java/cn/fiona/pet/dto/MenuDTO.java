@@ -46,6 +46,8 @@ public class MenuDTO implements Serializable {
     private String iconClass;
     @ApiModelProperty("地址")
     private String uri;
+    @ApiModelProperty("描述")
+    private String describe;
     @ApiModelProperty("子菜单")
     private List<MenuDTO> subMenu = new ArrayList<MenuDTO>();
 }

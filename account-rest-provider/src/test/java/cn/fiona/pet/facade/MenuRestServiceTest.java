@@ -1,9 +1,6 @@
 package cn.fiona.pet.facade;
 
-import cn.fiona.pet.dto.ListFilter;
-import cn.fiona.pet.dto.PageSearch;
-import cn.fiona.pet.dto.SearchFilter;
-import cn.fiona.pet.dto.Sort;
+import cn.fiona.pet.dto.*;
 import cn.fiona.pet.entity.Menu;
 
 import com.alibaba.fastjson.JSON;
@@ -21,7 +18,14 @@ public class MenuRestServiceTest {
   @Test
   public void create() throws Exception {
       String token = client.buildToken("admin", "admin");
-      Menu entity = new Menu();
+
+      MenuDTO entity = new MenuDTO();
+      entity.setCode("M00000");
+      entity.setName("业务办理");
+      entity.setUri("#");
+      entity.setIconClass("nav-item");
+      entity.setDescribe("业务办理");
+
 
       client.post("/menus", token, JSON.toJSONString(entity));
   }

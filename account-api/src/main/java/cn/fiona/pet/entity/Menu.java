@@ -60,6 +60,10 @@ public class Menu extends IdEntity {
      */
     @ApiModelProperty(value = "", required = false)
     private String describe;
+    @Column(name = "`describe`")
+    private String getDescribe(){
+        return this.describe;
+    }
     
     /**
      * 
@@ -72,6 +76,10 @@ public class Menu extends IdEntity {
      */
     @ApiModelProperty(value = "", required = false)
     private Integer order;
+    @Column(name = "`order`")
+    public Integer getOrder(){
+        return this.order;
+    }
     
     /**
      * 角色菜单 信息
