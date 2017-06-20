@@ -6,14 +6,10 @@ import cn.fiona.pet.dto.SearchFilter;
 import cn.fiona.pet.entity.IdEntity;
 import cn.fiona.pet.entity.Idable;
 import cn.fiona.pet.repository.DaoBase;
-
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
-
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -22,18 +18,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.*;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
