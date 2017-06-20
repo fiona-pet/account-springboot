@@ -48,8 +48,11 @@ public class MenuRestServiceTest {
       PageSearch pageSearch = new PageSearch();
       pageSearch.setPageSize(10);
       pageSearch.setPageNumber(1);
+
+      pageSearch.addFilters(new SearchFilter("parentCode", SearchFilter.Operator.EQ, "M00350"));
+
       Sort sort = new Sort();
-      sort.setFieldName("displayName");
+      sort.setFieldName("code");
       sort.setDirection("desc");
       pageSearch.setSort(sort);
       client.post("/menus/page", token, JSON.toJSONString(pageSearch));

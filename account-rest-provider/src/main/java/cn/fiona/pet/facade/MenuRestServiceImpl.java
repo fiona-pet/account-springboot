@@ -1,6 +1,8 @@
 package cn.fiona.pet.facade;
 
+import cn.fiona.pet.dto.PageSearch;
 import cn.fiona.pet.dto.RestResult;
+import cn.fiona.pet.dto.SearchFilter;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import com.alibaba.dubbo.rpc.protocol.rest.support.ContentType;
 import io.swagger.annotations.Api;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -52,5 +55,17 @@ public class MenuRestServiceImpl extends ConverterRestServiceBase<MenuDTO, Menu>
             a.setParentId(menu.getParentMenu().getId());
             a.setParentCode(menu.getParentMenu().getCode());
         }
+    }
+
+    @Override
+    public RestResult<Page<MenuDTO>> page(PageSearch pageSearch) {
+
+        for (SearchFilter searchFilter: pageSearch.getFilters()){
+            if ("parentCode".equals(searchFilter.getFieldName())){
+                searchFilter.setFieldName("parentMenu.code");
+            }
+        }
+
+        return super.page(pageSearch);
     }
 }

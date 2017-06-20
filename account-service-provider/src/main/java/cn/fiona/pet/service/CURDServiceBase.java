@@ -20,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.util.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -194,12 +195,11 @@ public abstract class CURDServiceBase<T extends Idable> implements CURDService<T
 
         while (it.hasNext()) {
             SearchFilter filter = (SearchFilter) it.next();
-//            String[] names = StringUtils.split(filter.fieldName, ".");
-            Path expression = root.get(filter.fieldName);
-
-           /* for (int i = 1; i < names.length; ++i) {
+            String[] names = StringUtils.split(filter.fieldName, ".");
+            Path expression = root.get(names[0]);
+            for (int i = 1; i < names.length; i++) {
                 expression = expression.get(names[i]);
-            }*/
+            }
 
             switch (filter.getOperator()) {
                 case EQ:
