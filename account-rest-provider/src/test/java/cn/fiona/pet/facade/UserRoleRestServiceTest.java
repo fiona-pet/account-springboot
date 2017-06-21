@@ -35,7 +35,7 @@ public class UserRoleRestServiceTest {
   @Test
   public void list() throws Exception {
       String token = client.buildToken("admin", "admin");
-      client.get("/userroles/list", token);
+      client.post("/userroles/list", token);
   }
 
   @Test
@@ -45,7 +45,7 @@ public class UserRoleRestServiceTest {
       pageSearch.setPageSize(10);
       pageSearch.setPageNumber(1);
       Sort sort = new Sort();
-      sort.setFieldName("displayName");
+      sort.setFieldName("userId");
       sort.setDirection("desc");
       pageSearch.setSort(sort);
       client.post("/userroles/page", token, JSON.toJSONString(pageSearch));

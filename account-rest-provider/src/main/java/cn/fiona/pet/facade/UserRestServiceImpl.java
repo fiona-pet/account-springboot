@@ -35,8 +35,8 @@ public class UserRestServiceImpl extends ConverterRestServiceBase<UserDTO, User>
     }
 
     @Override
-    public void backwardAfter(User user) {
-        super.backwardAfter(user);
+    public void backwardAfter(UserDTO userDTO, User user) {
+        super.backwardAfter(userDTO, user);
         Organize organize = new Organize();
         organize.setId("9b06d376-44ff-4153-9b31-c29a19b8da29");
         user.setOrganize(organize);

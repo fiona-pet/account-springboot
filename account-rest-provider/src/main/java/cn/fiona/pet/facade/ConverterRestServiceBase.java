@@ -30,6 +30,8 @@ public abstract class ConverterRestServiceBase<A, B> extends DefaultDataConverte
 
     @Override
     public RestResult<List<A>> list(ListFilter listFilter) {
+        filter(listFilter);
+
         List<B> list = this.getService().list(listFilter);
         LOGGER.debug("list:{}", list);
         List<A> dtoList = doForwardList(list);
@@ -39,6 +41,8 @@ public abstract class ConverterRestServiceBase<A, B> extends DefaultDataConverte
 
     @Override
     public RestResult<Page<A>> page(PageSearch pageSearch) {
+        filter(pageSearch);
+
         Page page = this.getService().page(pageSearch);
         LOGGER.debug("pageSearch:{} => {}", pageSearch, page);
 

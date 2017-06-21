@@ -7,6 +7,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 用户和角色关系信息
@@ -19,6 +21,7 @@ import java.util.Date;
 @Setter
 @Getter
 public class UserRoleDTO{
+
     @ApiModelProperty(value = "id")
     private String id;
 
@@ -34,5 +37,14 @@ public class UserRoleDTO{
      */
     @ApiModelProperty(value = "", required = false)
      private String roleId;
+
+    public static final Map<String, String> toEntityKey(){
+        Map<String, String> toEntityKey = new HashMap<String, String>();
+
+        toEntityKey.put("userId", "user.id");
+        toEntityKey.put("roleId", "role.id");
+
+        return toEntityKey;
+    }
     
 }

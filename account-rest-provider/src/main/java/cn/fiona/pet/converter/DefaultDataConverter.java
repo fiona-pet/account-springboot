@@ -1,11 +1,18 @@
 package cn.fiona.pet.converter;
 
+import cn.fiona.pet.dto.ListFilter;
+import cn.fiona.pet.dto.PageSearch;
+import cn.fiona.pet.dto.SearchFilter;
 import com.google.common.collect.Lists;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.lang.reflect.ParameterizedType;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -61,12 +68,12 @@ public abstract class DefaultDataConverter<dto, entity> implements Converter<dto
         entity entity = newEntity();
         BeanUtils.copyProperties(dto, entity);
 
-        backwardAfter(entity);
+        backwardAfter(dto, entity);
         return entity;
     }
 
     @Override
-    public void backwardAfter(final entity entity) {
+    public void backwardAfter(dto a, final entity entity) {
     }
 
     @Override
@@ -90,5 +97,29 @@ public abstract class DefaultDataConverter<dto, entity> implements Converter<dto
     @Override
     public void forwardAfter(dto a, entity entity) {
 
+    }
+
+    @Override
+    public void filter(@NotNull ListFilter listFilter) {
+        for (Map.Entry<String, String> entry: toEntityKey().entrySet()){
+            toEntityKey(entry,listFilter.getFilters());
+            toEntityKey(entry,listFilter.getAndFilters());
+        }
+    }
+
+    private void toEntityKey(Map.Entry<String, String> entry, List<SearchFilter> filters){
+        if (null == filters){
+            return;
+        }
+
+        for (SearchFilter filter: filters){
+            if (entry.getKey().equals(filter.getFieldName())){
+                filter.setFieldName(entry.getValue());
+            }
+        }
+    }
+
+    public Map<String, String> toEntityKey(){
+        return new HashMap<String,String>();
     }
 }
