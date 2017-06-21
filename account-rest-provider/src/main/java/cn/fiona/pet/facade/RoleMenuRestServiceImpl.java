@@ -1,5 +1,7 @@
 package cn.fiona.pet.facade;
 
+import cn.fiona.pet.entity.Menu;
+import cn.fiona.pet.entity.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +18,8 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 角色和菜单关系信息
@@ -32,4 +36,37 @@ public class RoleMenuRestServiceImpl extends ConverterRestServiceBase<RoleMenuDT
 
     @Autowired
     private RoleMenuService service;
+
+    @Override
+    public void backwardAfter(RoleMenuDTO dto, RoleMenu roleMenu) {
+        super.backwardAfter(dto, roleMenu);
+
+        Role role = new Role();
+        role.setCode(dto.getRoleCode());
+
+        roleMenu.setRole(role);
+
+        Menu menu = new Menu();
+        menu.setCode(dto.getMenuCode());
+
+        roleMenu.setMenu(menu);
+
+    }
+
+    @Override
+    public void forwardAfter(RoleMenuDTO dto, RoleMenu roleMenu) {
+        super.forwardAfter(dto, roleMenu);
+        dto.setMenuCode(roleMenu.getMenu().getCode());
+        dto.setRoleCode(roleMenu.getRole().getCode());
+    }
+
+    @Override
+    public Map<String, String> toEntityKey() {
+        Map<String, String> toEntityKey = new HashMap<String, String>();
+
+        toEntityKey.put("roleCode", "role.code");
+        toEntityKey.put("menuCode", "menu.code");
+
+        return toEntityKey;
+    }
 }

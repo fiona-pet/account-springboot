@@ -23,7 +23,7 @@ import java.util.Date;
 @DynamicUpdate
 @Setter
 @Getter
-@ToString
+//@ToString
 public class UserRole extends IdEntity {
     /**
      * 用户信息
