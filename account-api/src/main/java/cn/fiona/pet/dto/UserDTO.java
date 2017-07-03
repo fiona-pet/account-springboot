@@ -22,6 +22,12 @@ import java.util.Date;
 @Getter
 public class UserDTO {
     /**
+     * 标示
+     */
+    @ApiModelProperty(value = "标示", required = true)
+    private String id;
+
+    /**
      * 登录名
      */
     @ApiModelProperty(value = "登录名", required = true)
