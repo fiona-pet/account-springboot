@@ -10,4 +10,6 @@ import java.util.List;
  **/
 public interface UserRoleDao extends DaoBase<UserRole> {
     List<UserRole> findByRoleCode(String code);
+
+    UserRole findByUserIdAndRoleId(String userId, String roleId);
 }

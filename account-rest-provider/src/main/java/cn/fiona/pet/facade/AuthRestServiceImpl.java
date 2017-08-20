@@ -44,16 +44,9 @@ public class AuthRestServiceImpl implements AuthRestService {
     public RestResult<String> login(@ApiParam(value = "登录信息", required = true) SignInDTO signInDTO) {
         RestResult<String> restResult = RestResult.NOT_FOND();
 
-        try {
-            String token = accountService.login(signInDTO);
+        String token = accountService.login(signInDTO);
 
-            restResult = RestResult.OK(token);
-        } catch (RuntimeException apiE) {
-            restResult = RestResult.REST_RESULT(apiE);
-        } catch (Exception e) {
-            logger.warn("{}", e);
-            restResult = RestResult.ERROR(e.getMessage());
-        }
+        restResult = RestResult.OK(token);
 
         return restResult;
     }

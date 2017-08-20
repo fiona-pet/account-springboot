@@ -52,6 +52,11 @@ public class User extends IdEntity {
     private String salt;
 
     /**
+     * 状态
+     */
+    private String status;
+
+    /**
      * 注册日期
      */
     @ApiModelProperty(value = "注册日期")

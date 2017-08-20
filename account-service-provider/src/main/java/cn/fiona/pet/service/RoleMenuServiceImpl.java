@@ -1,6 +1,7 @@
 package cn.fiona.pet.service;
 
 import cn.fiona.pet.entity.RoleMenu;
+import cn.fiona.pet.entity.UserRole;
 import cn.fiona.pet.repository.RoleMenuDao;
 
 import lombok.Getter;
@@ -19,4 +20,13 @@ import javax.validation.constraints.NotNull;
 public class RoleMenuServiceImpl extends CURDServiceBase<RoleMenu> implements RoleMenuService {
     @Autowired
     private RoleMenuDao dao;
+
+    @Override
+    public RoleMenu createOrUpdte(RoleMenu entity) {
+        RoleMenu roleMenu = dao.findByRoleCodeAndMenuCode(entity.getRole().getCode(), entity.getMenu().getCode());
+        if (null == roleMenu){
+            return super.createOrUpdte(entity);
+        }
+        return roleMenu;
+    }
 }

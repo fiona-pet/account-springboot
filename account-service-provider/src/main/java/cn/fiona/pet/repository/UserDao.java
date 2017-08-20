@@ -11,4 +11,6 @@ public interface UserDao extends DaoBase<User> {
     User findByLoginName(String loginName);
 
     User findById(String token);
+
+    User findByLoginNameAndStatus(String name, String status);
 }

@@ -22,6 +22,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -65,5 +66,17 @@ public class UserRoleRestServiceImpl extends ConverterRestServiceBase<UserRoleDT
     @Override
     public Map<String, String> toEntityKey() {
         return UserRoleDTO.toEntityKey();
+    }
+
+    @Override
+    public void createBatch(List<UserRoleDTO> userRoleDTOs) {
+        for (UserRoleDTO userRoleDTO: userRoleDTOs){
+            UserRole userRole = new UserRole();
+
+            this.backwardAfter(userRoleDTO, userRole);
+
+            service.createOrUpdte(userRole);
+        }
+
     }
 }

@@ -7,4 +7,5 @@ import cn.fiona.pet.entity.RoleMenu;
 * Created by tom on 2017-06-02 09:47:58.
  **/
 public interface RoleMenuDao extends DaoBase<RoleMenu> {
+    RoleMenu findByRoleCodeAndMenuCode(String roleCode, String menuCode);
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  *  用户和角色关系信息
@@ -19,4 +20,13 @@ import javax.validation.constraints.NotNull;
 public class UserRoleServiceImpl extends CURDServiceBase<UserRole> implements UserRoleService {
     @Autowired
     private UserRoleDao dao;
+
+    @Override
+    public UserRole createOrUpdte(UserRole entity) {
+        UserRole userRole = dao.findByUserIdAndRoleId(entity.getUser().getId(), entity.getRole().getId());
+        if (null == userRole){
+            return super.createOrUpdte(entity);
+        }
+        return userRole;
+    }
 }

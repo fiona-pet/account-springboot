@@ -19,6 +19,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -68,5 +69,16 @@ public class RoleMenuRestServiceImpl extends ConverterRestServiceBase<RoleMenuDT
         toEntityKey.put("menuCode", "menu.code");
 
         return toEntityKey;
+    }
+
+    @Override
+    public void createBatch(List<RoleMenuDTO> roleMenuDTOs) {
+        for (RoleMenuDTO roleMenuDTO: roleMenuDTOs){
+            RoleMenu roleMenu = new RoleMenu();
+
+            this.backwardAfter(roleMenuDTO, roleMenu);
+
+            service.createOrUpdte(roleMenu);
+        }
     }
 }

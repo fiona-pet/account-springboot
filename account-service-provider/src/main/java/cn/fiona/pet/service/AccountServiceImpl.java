@@ -10,6 +10,7 @@ import cn.fiona.pet.repository.UserDao;
 import cn.fiona.pet.repository.UserRoleDao;
 import com.alibaba.dubbo.common.utils.StringUtils;
 import lombok.Getter;
+import org.apache.shiro.authc.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +45,10 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public String login(@NotNull SignInDTO signInDTO) {
-        User user = userDao.findByLoginName(signInDTO.getName());
+        User user = userDao.findByLoginNameAndStatus(signInDTO.getName(),"OK");
 
         if (null == user) {
-            throw new RuntimeException(String.format("[%s]用户未找到!", signInDTO));
+            throw new AuthenticationException(String.format("[%s]用户未找到!", signInDTO));
         }
 
         String password = signInDTO.getPassword();
