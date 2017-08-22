@@ -58,6 +58,14 @@ public class MenuRestServiceImpl extends ConverterRestServiceBase<MenuDTO, Menu>
     }
 
     @Override
+    public void backwardAfter(MenuDTO menuDTO, Menu menu) {
+        Menu parentMenu = new Menu();
+        parentMenu.setCode(menuDTO.getParentCode());
+        parentMenu.setId(menuDTO.getParentId());
+        menu.setParentMenu(parentMenu);
+    }
+
+    @Override
     public RestResult<Page<MenuDTO>> page(PageSearch pageSearch) {
 
         for (SearchFilter searchFilter: pageSearch.getFilters()){

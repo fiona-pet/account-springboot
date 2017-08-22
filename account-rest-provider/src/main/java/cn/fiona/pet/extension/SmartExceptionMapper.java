@@ -24,6 +24,9 @@ public class SmartExceptionMapper implements ExceptionMapper<RuntimeException> {
     @Override
     public Response toResponse(RuntimeException ex) {
         RestResult restResult = new RestResult();
+        restResult.setErrorCode(Response.Status.OK.getStatusCode());
+        restResult.setErrorMessage("成功");
+
         if (ex instanceof UnauthorizedException) {
             restResult.setErrorCode(Response.Status.FORBIDDEN.getStatusCode());
             restResult.setErrorMessage("请检查资源权限");
