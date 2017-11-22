@@ -25,14 +25,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @ApiModel("返回结果")
 public class RestResult<T> implements Serializable {
     @ApiModelProperty("错误码:0 无错误信息;404 未找到资源; 500 服务器错误;")
-    private RestResultEnum resultEnum = RestResultEnum.OK;
+    private int code;
+    private String message;
 
     public RestResult() {
 
     }
 
     public RestResult(RestResultEnum resultEnum) {
-        this.resultEnum = resultEnum;
+        this.setErrorMessage(resultEnum.getDesc());
+        this.setErrorCode(resultEnum.getCode());
+        this.setCode(resultEnum.getCode());
+        this.setMessage(resultEnum.getDesc());
     }
 
     public static <T> RestResult<T> REST_RESULT(RestResultEnum resultEnum, T data){
@@ -48,6 +52,11 @@ public class RestResult<T> implements Serializable {
 
     public static <T> RestResult<T> OK(T data){
         RestResult restResult = new RestResult(RestResultEnum.OK);
+
+        restResult.setErrorMessage(RestResultEnum.OK.getDesc());
+        restResult.setErrorCode(RestResultEnum.OK.getCode());
+        restResult.setCode(RestResultEnum.OK.getCode());
+        restResult.setMessage(RestResultEnum.OK.getDesc());
         restResult.setData(data);
         return restResult;
     }
@@ -56,19 +65,20 @@ public class RestResult<T> implements Serializable {
     private T data;
 
     public int getCode() {
-        return resultEnum.getCode();
+        return this.code;
     }
 
     public String getMessage() {
-        return resultEnum.getDesc();
+        return this.message;
     }
 
     public void setCode(int code) {
-        this.resultEnum.setCode(code);
+        this.code = code;
+
     }
 
     public void setMessage(String message) {
-        this.resultEnum.setDesc(message);
+        this.message = message;
     }
 
     public T getData() {

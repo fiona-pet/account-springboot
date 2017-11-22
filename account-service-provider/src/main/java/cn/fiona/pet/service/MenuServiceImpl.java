@@ -122,8 +122,8 @@ public class MenuServiceImpl extends CURDServiceBase<Menu> implements MenuServic
             if (parentMenu == null || code.equals(parentMenu.getCode())) {
                 MenuDTO menuDTO = new MenuDTO(menu);
 
-                menuDTO.setParentId(menu.getParentMenu().getId());
-                menuDTO.setParentCode(menu.getParentMenu().getCode());
+//                menuDTO.setParentId(menu.getParentMenu().getId());
+//                menuDTO.setParentCode(menu.getParentMenu().getCode());
 
                 MenuDTOList.add(menuDTO);
 
